@@ -35,7 +35,7 @@ git clone https://github.com/fachridedeli/setip.git <your_path>
 
 ```
 or copy raw code here:<br>
-https://github.com/fachridedeli/setippy/blob/main/setip.py
+https://github.com/fachridedeli/setippy/blob/main/setippy.py
 
 <br>
 
