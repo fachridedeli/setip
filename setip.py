@@ -24,7 +24,7 @@ def setip():
 
 # info label
 info_label = tk.Label(
-    root, text="This app need administrator privilage", font=("Gill Sans MT", 12))
+    root, text="This app need administrator privilege", font=("Gill Sans MT", 12))
 info_label.pack(pady=10)
 
 # interface label
