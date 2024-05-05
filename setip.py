@@ -6,11 +6,11 @@ from tkinter import messagebox
 root = tk.Tk()
 
 root.title("Ipv4 Settings")
-root.geometry('500x650')
+root.geometry('500x700')
 
 
 def setip():
-    if interface_entry.get() or ip_entry.get() or subnet_entry.get() or gateway_entry.get() or dns_entry.get() or dns_alternate_entry.get() != "":
+    if (interface_entry.get() and ip_entry.get() and subnet_entry.get() and gateway_entry.get() and dns_entry.get() and dns_alternate_entry.get()) != "":
         os.system(f'netsh interface ipv4 set address name="{interface_entry.get()}" static {
                   ip_entry.get()} {subnet_entry.get()} {gateway_entry.get()}')
         os.system(f'netsh interface ipv4 add dnsserver name="{
@@ -19,7 +19,17 @@ def setip():
                   interface_entry.get()}" address={dns_alternate_entry.get()} index=2')
         messagebox.showinfo(title="Info", message="Check your IP")
     else:
-        messagebox.showerror(title="Alert", message="Field Can't be blank")
+        messagebox.showerror(title="Alert", message="All Field Can't be blank")
+
+
+def reset():
+    if interface_entry.get() != "":
+        os.system(f'netsh interface ipv4 set address name="{
+                  interface_entry.get()}" source=dhcp')
+        messagebox.showinfo(title="Info", message="Check your IP")
+    else:
+        messagebox.showerror(
+            title="Alert", message="Please input interface field")
 
 
 # info label
@@ -32,10 +42,10 @@ interface_label = tk.Label(
     root, text="Enter interface: \n (exmpl: Ethernet or Ethernet2 or Wi-Fi etc)", font=("Gill Sans MT", 10))
 interface_label.pack(pady=10)
 
+
 # ip entry
 interface_entry = tk.Entry(root, width=20, font=("Gill Sans MT", 10))
 interface_entry.pack()
-
 
 # ip label
 ip_label = tk.Label(
@@ -85,7 +95,11 @@ dns_alternate_entry.pack()
 
 # button
 my_button = tk.Button(root, text="Submit", command=setip)
-my_button.pack(pady=20)
+my_button.pack(pady=(20, 10))
+
+# Reset button
+reset_button = tk.Button(root, text="Reset to DHCP", command=reset)
+reset_button.pack(pady=10)
 
 
 root.mainloop()
