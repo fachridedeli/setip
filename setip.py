@@ -26,6 +26,8 @@ def reset():
     if interface_entry.get() != "":
         os.system(f'netsh interface ipv4 set address name="{
                   interface_entry.get()}" source=dhcp')
+        os.system(f'netsh interface ipv4 set dnsserver name="{
+                  interface_entry.get()}" source=dhcp')
         messagebox.showinfo(title="Info", message="Check your IP")
     else:
         messagebox.showerror(
